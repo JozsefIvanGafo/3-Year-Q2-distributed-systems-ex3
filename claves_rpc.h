@@ -52,9 +52,6 @@ typedef struct arg_send_values arg_send_values;
 #define destroy 1
 extern  enum clnt_stat destroy_1(int *, CLIENT *);
 extern  bool_t destroy_1_svc(int *, struct svc_req *);
-#define create 0
-extern  enum clnt_stat create_1(int *, CLIENT *);
-extern  bool_t create_1_svc(int *, struct svc_req *);
 #define set_value 2
 extern  enum clnt_stat set_value_1(struct arg_send_values , int *, CLIENT *);
 extern  bool_t set_value_1_svc(struct arg_send_values , int *, struct svc_req *);
@@ -76,9 +73,6 @@ extern int clavesrpc_1_freeresult (SVCXPRT *, xdrproc_t, caddr_t);
 #define destroy 1
 extern  enum clnt_stat destroy_1();
 extern  bool_t destroy_1_svc();
-#define create 0
-extern  enum clnt_stat create_1();
-extern  bool_t create_1_svc();
 #define set_value 2
 extern  enum clnt_stat set_value_1();
 extern  bool_t set_value_1_svc();

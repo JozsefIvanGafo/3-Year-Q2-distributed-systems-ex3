@@ -11,11 +11,9 @@ SOURCES_CLNT.h =
 SOURCES_SVC.c = 
 SOURCES_SVC.h = 
 SOURCES.x = claves_rpc.x
-#Es la parte de rpc en el servidor
-#claves_rpc_server cambiarlo a server-rpc
-TARGETS_SVC.c = claves_rpc_svc.c claves_rpc_server.c claves_rpc_xdr.c 
-#Es la parte de rpc en el cliente
-TARGETS_CLNT.c = claves_rpc_clnt.c claves_rpc_client.c claves_rpc_xdr.c 
+
+TARGETS_SVC.c = claves_rpc_svc.c server-rpc.c claves_rpc_xdr.c 
+TARGETS_CLNT.c = claves_rpc_clnt.c proxy-rpc.c claves_rpc_xdr.c 
 TARGETS = claves_rpc.h claves_rpc_xdr.c claves_rpc_clnt.c claves_rpc_svc.c claves_rpc_client.c claves_rpc_server.c
 
 OBJECTS_CLNT = $(SOURCES_CLNT.c:%.c=%.o) $(TARGETS_CLNT.c:%.c=%.o)
@@ -23,9 +21,9 @@ OBJECTS_SVC = $(SOURCES_SVC.c:%.c=%.o) $(TARGETS_SVC.c:%.c=%.o)
 # Compiler flags 
 
 CPPFLAGS += -D_REENTRANT
-CFLAGS += -g 
-LDLIBS += -lnsl -lpthread 
- RPCGENFLAGS = 
+CFLAGS += -g -I/usr/include/tirpc
+LDLIBS += -lnsl -lpthread -ldl -ltirpc
+RPCGENFLAGS = 
 
 # Targets 
 
@@ -44,5 +42,6 @@ $(CLIENT) : $(OBJECTS_CLNT)
 $(SERVER) : $(OBJECTS_SVC) 
 	$(LINK.c) -o $(SERVER) $(OBJECTS_SVC) $(LDLIBS)
 
-clean:
-	$(RM) core $(OBJECTS_CLNT) $(OBJECTS_SVC) $(CLIENT) $(SERVER)
+ clean:
+	 $(RM) core  $(OBJECTS_CLNT) $(OBJECTS_SVC) $(CLIENT) $(SERVER)
+

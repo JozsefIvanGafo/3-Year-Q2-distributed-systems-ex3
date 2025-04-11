@@ -23,8 +23,6 @@ program CLAVESRPC{
    version CLAVESRPC{
       int destroy(void)=1;
 
-      int create(void)=0;
-
       int set_value(struct arg_send_values a1)=2;
 
 

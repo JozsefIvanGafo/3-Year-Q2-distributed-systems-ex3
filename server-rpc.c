@@ -19,18 +19,6 @@ destroy_1_svc(int *result, struct svc_req *rqstp)
 }
 
 bool_t
-create_1_svc(int *result, struct svc_req *rqstp)
-{
-	bool_t retval;
-
-	/*
-	 * insert server code here
-	 */
-
-	return retval;
-}
-
-bool_t
 set_value_1_svc(struct arg_send_values a1, int *result,  struct svc_req *rqstp)
 {
 	bool_t retval;

@@ -19,15 +19,6 @@ destroy_1(int *clnt_res, CLIENT *clnt)
 }
 
 enum clnt_stat 
-create_1(int *clnt_res, CLIENT *clnt)
-{
-	 return (clnt_call (clnt, create, (xdrproc_t) xdr_void, (caddr_t) NULL,
-		(xdrproc_t) xdr_int, (caddr_t) clnt_res,
-		TIMEOUT));
-
-}
-
-enum clnt_stat 
 set_value_1(struct arg_send_values a1, int *clnt_res,  CLIENT *clnt)
 {
 	return (clnt_call(clnt, set_value,

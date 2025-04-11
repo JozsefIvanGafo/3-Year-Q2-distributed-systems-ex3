@@ -23,12 +23,6 @@ _destroy_1 (void  *argp, void *result, struct svc_req *rqstp)
 }
 
 int
-_create_1 (void  *argp, void *result, struct svc_req *rqstp)
-{
-	return (create_1_svc(result, rqstp));
-}
-
-int
 _set_value_1 (struct arg_send_values  *argp, void *result, struct svc_req *rqstp)
 {
 	return (set_value_1_svc(*argp, result, rqstp));
@@ -70,7 +64,6 @@ clavesrpc_1(struct svc_req *rqstp, register SVCXPRT *transp)
 	} argument;
 	union {
 		int destroy_1_res;
-		int create_1_res;
 		int set_value_1_res;
 		struct ret_get_value get_value_1_res;
 		int modify_value_1_res;
@@ -82,16 +75,14 @@ clavesrpc_1(struct svc_req *rqstp, register SVCXPRT *transp)
 	bool_t (*local)(char *, void *, struct svc_req *);
 
 	switch (rqstp->rq_proc) {
+	case NULLPROC:
+		(void) svc_sendreply (transp, (xdrproc_t) xdr_void, (char *)NULL);
+		return;
+
 	case destroy:
 		_xdr_argument = (xdrproc_t) xdr_void;
 		_xdr_result = (xdrproc_t) xdr_int;
 		local = (bool_t (*) (char *, void *,  struct svc_req *))_destroy_1;
-		break;
-
-	case create:
-		_xdr_argument = (xdrproc_t) xdr_void;
-		_xdr_result = (xdrproc_t) xdr_int;
-		local = (bool_t (*) (char *, void *,  struct svc_req *))_create_1;
 		break;
 
 	case set_value:
