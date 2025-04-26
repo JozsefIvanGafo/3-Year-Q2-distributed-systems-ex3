@@ -17,58 +17,58 @@
 #endif
 
 int
-_destroy_1 (void  *argp, void *result, struct svc_req *rqstp)
+_destroy_rpc_1 (void  *argp, void *result, struct svc_req *rqstp)
 {
-	return (destroy_1_svc(result, rqstp));
+	return (destroy_rpc_1_svc(result, rqstp));
 }
 
 int
-_set_value_1 (struct arg_send_values  *argp, void *result, struct svc_req *rqstp)
+_set_value_rpc_1 (struct arg_send_values  *argp, void *result, struct svc_req *rqstp)
 {
-	return (set_value_1_svc(*argp, result, rqstp));
+	return (set_value_rpc_1_svc(*argp, result, rqstp));
 }
 
 int
-_get_value_1 (int  *argp, void *result, struct svc_req *rqstp)
+_get_value_rpc_1 (int  *argp, void *result, struct svc_req *rqstp)
 {
-	return (get_value_1_svc(*argp, result, rqstp));
+	return (get_value_rpc_1_svc(*argp, result, rqstp));
 }
 
 int
-_modify_value_1 (struct arg_send_values  *argp, void *result, struct svc_req *rqstp)
+_modify_value_rpc_1 (struct arg_send_values  *argp, void *result, struct svc_req *rqstp)
 {
-	return (modify_value_1_svc(*argp, result, rqstp));
+	return (modify_value_rpc_1_svc(*argp, result, rqstp));
 }
 
 int
-_delete_key_1 (int  *argp, void *result, struct svc_req *rqstp)
+_delete_key_rpc_1 (int  *argp, void *result, struct svc_req *rqstp)
 {
-	return (delete_key_1_svc(*argp, result, rqstp));
+	return (delete_key_rpc_1_svc(*argp, result, rqstp));
 }
 
 int
-_exist_1 (int  *argp, void *result, struct svc_req *rqstp)
+_exist_rpc_1 (int  *argp, void *result, struct svc_req *rqstp)
 {
-	return (exist_1_svc(*argp, result, rqstp));
+	return (exist_rpc_1_svc(*argp, result, rqstp));
 }
 
 static void
 clavesrpc_1(struct svc_req *rqstp, register SVCXPRT *transp)
 {
 	union {
-		struct arg_send_values set_value_1_arg;
-		int get_value_1_arg;
-		struct arg_send_values modify_value_1_arg;
-		int delete_key_1_arg;
-		int exist_1_arg;
+		struct arg_send_values set_value_rpc_1_arg;
+		int get_value_rpc_1_arg;
+		struct arg_send_values modify_value_rpc_1_arg;
+		int delete_key_rpc_1_arg;
+		int exist_rpc_1_arg;
 	} argument;
 	union {
-		int destroy_1_res;
-		int set_value_1_res;
-		struct ret_get_value get_value_1_res;
-		int modify_value_1_res;
-		int delete_key_1_res;
-		int exist_1_res;
+		int destroy_rpc_1_res;
+		int set_value_rpc_1_res;
+		struct ret_get_value get_value_rpc_1_res;
+		int modify_value_rpc_1_res;
+		int delete_key_rpc_1_res;
+		int exist_rpc_1_res;
 	} result;
 	bool_t retval;
 	xdrproc_t _xdr_argument, _xdr_result;
@@ -79,40 +79,40 @@ clavesrpc_1(struct svc_req *rqstp, register SVCXPRT *transp)
 		(void) svc_sendreply (transp, (xdrproc_t) xdr_void, (char *)NULL);
 		return;
 
-	case destroy:
+	case destroy_rpc:
 		_xdr_argument = (xdrproc_t) xdr_void;
 		_xdr_result = (xdrproc_t) xdr_int;
-		local = (bool_t (*) (char *, void *,  struct svc_req *))_destroy_1;
+		local = (bool_t (*) (char *, void *,  struct svc_req *))_destroy_rpc_1;
 		break;
 
-	case set_value:
+	case set_value_rpc:
 		_xdr_argument = (xdrproc_t) xdr_arg_send_values;
 		_xdr_result = (xdrproc_t) xdr_int;
-		local = (bool_t (*) (char *, void *,  struct svc_req *))_set_value_1;
+		local = (bool_t (*) (char *, void *,  struct svc_req *))_set_value_rpc_1;
 		break;
 
-	case get_value:
+	case get_value_rpc:
 		_xdr_argument = (xdrproc_t) xdr_int;
 		_xdr_result = (xdrproc_t) xdr_ret_get_value;
-		local = (bool_t (*) (char *, void *,  struct svc_req *))_get_value_1;
+		local = (bool_t (*) (char *, void *,  struct svc_req *))_get_value_rpc_1;
 		break;
 
-	case modify_value:
+	case modify_value_rpc:
 		_xdr_argument = (xdrproc_t) xdr_arg_send_values;
 		_xdr_result = (xdrproc_t) xdr_int;
-		local = (bool_t (*) (char *, void *,  struct svc_req *))_modify_value_1;
+		local = (bool_t (*) (char *, void *,  struct svc_req *))_modify_value_rpc_1;
 		break;
 
-	case delete_key:
+	case delete_key_rpc:
 		_xdr_argument = (xdrproc_t) xdr_int;
 		_xdr_result = (xdrproc_t) xdr_int;
-		local = (bool_t (*) (char *, void *,  struct svc_req *))_delete_key_1;
+		local = (bool_t (*) (char *, void *,  struct svc_req *))_delete_key_rpc_1;
 		break;
 
-	case exist:
+	case exist_rpc:
 		_xdr_argument = (xdrproc_t) xdr_int;
 		_xdr_result = (xdrproc_t) xdr_int;
-		local = (bool_t (*) (char *, void *,  struct svc_req *))_exist_1;
+		local = (bool_t (*) (char *, void *,  struct svc_req *))_exist_rpc_1;
 		break;
 
 	default:
@@ -143,15 +143,15 @@ main (int argc, char **argv)
 {
 	register SVCXPRT *transp;
 
-	pmap_unset (CLAVESRPC, CLAVESRPC);
+	pmap_unset (CLAVESRPC, CLAVESRPC_VERSION);
 
 	transp = svcudp_create(RPC_ANYSOCK);
 	if (transp == NULL) {
 		fprintf (stderr, "%s", "cannot create udp service.");
 		exit(1);
 	}
-	if (!svc_register(transp, CLAVESRPC, CLAVESRPC, clavesrpc_1, IPPROTO_UDP)) {
-		fprintf (stderr, "%s", "unable to register (CLAVESRPC, CLAVESRPC, udp).");
+	if (!svc_register(transp, CLAVESRPC, CLAVESRPC_VERSION, clavesrpc_1, IPPROTO_UDP)) {
+		fprintf (stderr, "%s", "unable to register (CLAVESRPC, CLAVESRPC_VERSION, udp).");
 		exit(1);
 	}
 
@@ -160,8 +160,8 @@ main (int argc, char **argv)
 		fprintf (stderr, "%s", "cannot create tcp service.");
 		exit(1);
 	}
-	if (!svc_register(transp, CLAVESRPC, CLAVESRPC, clavesrpc_1, IPPROTO_TCP)) {
-		fprintf (stderr, "%s", "unable to register (CLAVESRPC, CLAVESRPC, tcp).");
+	if (!svc_register(transp, CLAVESRPC, CLAVESRPC_VERSION, clavesrpc_1, IPPROTO_TCP)) {
+		fprintf (stderr, "%s", "unable to register (CLAVESRPC, CLAVESRPC_VERSION, tcp).");
 		exit(1);
 	}
 

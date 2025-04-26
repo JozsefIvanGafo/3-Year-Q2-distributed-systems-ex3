@@ -6,7 +6,7 @@
 #include "claves_rpc.h"
 
 bool_t
-xdr_Coord (XDR *xdrs, Coord *objp)
+xdr_rpc_Coord (XDR *xdrs, rpc_Coord *objp)
 {
 	register int32_t *buf;
 
@@ -31,7 +31,7 @@ xdr_ret_get_value (XDR *xdrs, ret_get_value *objp)
 	 if (!xdr_array (xdrs, (char **)&objp->V_value2.V_value2_val, (u_int *) &objp->V_value2.V_value2_len, 32,
 		sizeof (double), (xdrproc_t) xdr_double))
 		 return FALSE;
-	 if (!xdr_Coord (xdrs, &objp->value3))
+	 if (!xdr_rpc_Coord (xdrs, &objp->value3))
 		 return FALSE;
 	return TRUE;
 }
@@ -50,7 +50,7 @@ xdr_arg_send_values (XDR *xdrs, arg_send_values *objp)
 	 if (!xdr_array (xdrs, (char **)&objp->V_value2.V_value2_val, (u_int *) &objp->V_value2.V_value2_len, 32,
 		sizeof (double), (xdrproc_t) xdr_double))
 		 return FALSE;
-	 if (!xdr_Coord (xdrs, &objp->value3))
+	 if (!xdr_rpc_Coord (xdrs, &objp->value3))
 		 return FALSE;
 	return TRUE;
 }
