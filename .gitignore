@@ -50,3 +50,13 @@ modules.order
 Module.symvers
 Mkfile.old
 dkms.conf
+# Binary directories
+bin/
+*/bin/
+build/
+*/build/
+target/
+*/target/
+
+# Additional binary files
+*.bin
