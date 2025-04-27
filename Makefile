@@ -1,15 +1,18 @@
 # Compilador y opciones
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -O2 -D_GNU_SOURCE
+#para debugging
 #CFLAGS = -Wall -Wextra -std=c11 -O2 -D_GNU_SOURCE -DDEBUG
-# Add TI-RPC flags
+
 CFLAGS += -g -I/usr/include/tirpc
-#Library flags
+# flags de la libreria
 LDFLAGS = -pthread
 LDLIBS += -lnsl -lpthread -ldl -ltirpc
 
+# Archivo de definición RPC (corregido para apuntar al directorio correcto)
+RPC_DEF = rpc/claves_rpc.x
+
 # Archivos fuente RPC
-# Remove claves.c from proxy sources to avoid duplicate symbols
 SRCS_PROXY = rpc/proxy/proxy-rpc.c rpc/claves_rpc_clnt.c rpc/claves_rpc_xdr.c
 SRCS_SERVER = rpc/servidor/servidor-rpc.c claves/claves.c rpc/claves_rpc_svc.c rpc/claves_rpc_xdr.c
 # Archivos fuente del cliente
@@ -20,7 +23,11 @@ CLIENT_EXECS = $(patsubst app-cliente/%.c, %, $(CLIENT_SRCS))
 LIBRARY = libclaves.so
 SERVER = servidor-rpc
 
-all: $(LIBRARY) $(SERVER) $(CLIENT_EXECS)
+all: rpcgen $(LIBRARY) $(SERVER) $(CLIENT_EXECS)
+
+# Generar archivos RPC con rpcgen (corregido para usar el nombre base)
+rpcgen: $(RPC_DEF)
+	(cd rpc && rpcgen -M -N claves_rpc.x)
 
 # Compilar la biblioteca compartida con proxy-rpc.c
 $(LIBRARY): $(SRCS_PROXY)
@@ -37,3 +44,4 @@ $(SERVER): $(SRCS_SERVER)
 # Limpiar archivos compilados
 clean:
 	rm -f $(LIBRARY) $(SERVER) $(CLIENT_EXECS)
+	rm -f rpc/claves_rpc.h rpc/claves_rpc_clnt.c rpc/claves_rpc_svc.c rpc/claves_rpc_xdr.c
